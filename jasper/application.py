@@ -21,7 +21,8 @@ USE_BATCH_MIC = 2
 
 class Jasper(object):
 
-    def __init__(self, use_mic=USE_STANDARD_MIC, batchfilecontent=None):
+    def __init__(self, use_mic=USE_STANDARD_MIC, batch_file=None):
+
         self._logger = logging.getLogger(__name__)
 
         # Create config dir if it does not exist yet
@@ -218,12 +219,12 @@ class Jasper(object):
         # Initialize Mic
         if use_mic == USE_TEXT_MIC:
             self.mic = local_mic.Mic()
-	    self._logger.info("Using local text input and output")
+            self._logger.info('Using local text input and output')
         elif use_mic == USE_BATCH_MIC:
             self.mic = batch_mic.Mic(passive_stt_plugin,
-                                     active_stt_plugin, batchfilecontent,
+                                     active_stt_plugin, batch_file,
                                      keyword=keyword)
-	    self._logger.info("Using batched mode with %i commands", len(batchfilecontent))
+            self._logger.info('Using batched mode')
         else:
             self.mic = mic.Mic(
                 input_device, output_device,

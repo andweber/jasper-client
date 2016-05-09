@@ -3,10 +3,12 @@ import datetime
 from jasper import app_utils
 from jasper import plugin
 
-
 class ClockPlugin(plugin.SpeechHandlerPlugin):
     def get_phrases(self):
-        return [self.gettext("TIME")]
+        return [self.gettext("WHAT TIME IS IT"),
+		self.gettext("TIME"),
+		self.gettext("WHAT TIME IS IT NOW")
+	]
 
     def handle(self, text, mic):
         """
@@ -32,4 +34,5 @@ class ClockPlugin(plugin.SpeechHandlerPlugin):
         Arguments:
         text -- user-input, typically transcribed speech
         """
-        return any(p.lower() in text.lower() for p in self.get_phrases())
+	
+        return any(p.decode('utf-8').lower() in text.lower() for p in self.get_phrases())

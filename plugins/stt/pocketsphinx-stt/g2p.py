@@ -20,11 +20,10 @@ def execute(executable, fst_model, input, is_file=False, nbest=None):
 
     cmd = [executable,
            '--model=%s' % fst_model,
-           '--input=%s' % input,
-           '--words']
+           '--wordlist=%s' % input]
 
-    if is_file:
-        cmd.append('--isfile')
+    #if is_file:
+    #    cmd.append('--isfile')
 
     if nbest is not None:
         cmd.extend(['--nbest=%d' % nbest])
